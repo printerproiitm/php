@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Printer Pro</title>
+    <link rel = "stylesheet" href = "design.css" type = "text/css">
+
+  </head>
+  <body style = "background-color: rgb(43, 51, 79);">
+    <h3>Cart</h3>      
+    <form id="myForm" action="http://localhost:7400/printer-website" method="post" enctype="multipart/form-data">
+      <input type="file" name="inpFile" id="inpFile" accept="*.png"><br>
+      <button type="submit">Upload File</button>
+    </form>
+    
+    
+    <script src="/Users/vervypotato/elec club/basic/project/djangoproject/testupload/require.js" data-main="main"></script>
+    
+
+    <script>
+
+      const myForm = document.getElementById("myForm"); 
+      const inpFile = document.getElementById("inpfile");
+
+      // myForm.addEventListener("submit", e => {
+      //   e.preventDefault();
+
+      //   console.log("here")
+
+      //   const endpoint = "upload.php"
+      //   const formData = new FormData();
+
+      //   console.log(inpFile.files);
+
+      //   formData.append("inpFile", inpFile.files[0])
+      // })
+    </script>
+
+    <script src="/Users/vervypotato/elec club/basic/project/djangoproject/testupload/server.js"></script>
+  </body>
+</html> 
+
+

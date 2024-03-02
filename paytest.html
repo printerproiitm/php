@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printer Pro</title>
+    <link rel = "stylesheet" href = "pretty.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+</head>
+<body>
+    <h1 class = "myclass"> Printer Pro </h1>
+    <h2 class = "myclass"> We Automate Printing. </h2>
+    <div class="move-right">
+    <p> We aim to help printing businesses by eliminating the need for a shopkeeper using a simple <b>raspberry pi</b> system for automating printing with a customer friendly product.</p><br><br>
+
+    <form id="printOrder">
+        Enter the no. of copies
+        <br>
+        <input id = "duplicates" name="duplicates" placeholder="enter a valid number" required>
+        <br>
+        Enter the range of pages
+        <br>
+        <input id = "low_range" name="low_range" placeholder="lower range" required>
+        <input id="upper_range" name="upper_range" placeholder="upper range" required>
+        <br>
+        B&W or color print out
+        
+        <label for="color">Choose the color option</label>
+        <select name="color" id="color" required>
+            <option value="bw">B&W</option>
+            <option value="colored">Colored</option>
+        </select>
+        <br><br>
+        <div class="calcButton">
+        <button type="button" id="calculateBtn" onclick="calculateAmount();generateLink();">Calculate Bill</button>
+        </div>
+        <div id="resultContainer"></div>
+        
+    </form>
+    </div>
+
+    <script>
+        // Function to transpose the form data (swap rows and columns)
+        function transposeFormData(formData) {
+        const data = Array.from(formData.entries());
+        const transposedData = data[0].map((_, colIndex) => data.map(row => row[colIndex]));
+        console.log(transposedData);
+        return transposedData;
+        }
+
+        // Function to convert transposed form data to CSV format
+        function convertTransposedFormDataToCSV(transposedData) {
+        const csvData = transposedData.map(row => row.join(',')).join("\n");
+        return csvData;
+        }
+
+        // Function to initiate download of CSV file
+        function downloadCSV(csvData) {
+        const blob = new Blob([csvData], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('href', url);
+        a.setAttribute('download', 'data.csv');
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        }
+
+        // Event listener for Convert to CSV button click
+        document.getElementById('calculateBtn').addEventListener('click', () => {
+        const formData = new FormData(document.getElementById('printOrder'));
+        const transposedData = transposeFormData(formData);
+        const csvData = convertTransposedFormDataToCSV(transposedData);
+        downloadCSV(csvData);
+        console.log(formData);
+        });
+    </script>
+    <script src="/Users/vervypotato/elec club/basic/project/testpay/pay.js"></script>
+    <script src="/Users/vervypotato/elec club/basic/project/testpay/serverpay.js"></script>
+    <!--<script src="/Users/vervypotato/elec club/basic/project/razorpay.js"></script>-->
+</body>
+</html> 
